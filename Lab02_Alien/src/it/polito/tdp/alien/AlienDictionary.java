@@ -5,35 +5,26 @@ import java.util.List;
 
 public class AlienDictionary {
 	
-	private List<Word> dictionary;
+	private List<WordEnhanced> dictionary;
 
 	public AlienDictionary() {
-		dictionary= new ArrayList<Word>();
+		dictionary= new ArrayList<WordEnhanced>();
 	}
-	public void addWord(String alienWord, String translation) {
-	
-		//cerco nella lista se la parola è già presente
-		for(Word w:dictionary) {
-			if(w.compare(alienWord)) {
-				//aggiorno la traduzione
-				w.setTranslation(translation);
-				return;
-			}
-			
+	public void addWord(String alien, String trans) {
+		WordEnhanced w = new WordEnhanced(alien);
+		if (dictionary.contains(w)) {
+			dictionary.get(dictionary.indexOf(w)).setTranslation(trans);
+			return;
 		}
-		Word w= new Word(alienWord,translation);
+		w.setTranslation(trans);
 		dictionary.add(w);
-		
 	}
-	public String translateWord(String alienWord) {
-	
-	//se ho la parola nel dizionario ritorno la traduzione altrimenti null
-		for(Word w:dictionary) {
-			if(w.compare(alienWord)) {
-				return w.getTranslation();
-			}}
+
+	public String translateWord(String alien) {
+		WordEnhanced we = new WordEnhanced(alien);
+		if (dictionary.contains(we))
+			return dictionary.get(dictionary.indexOf(we)).getTranslation();
 		return null;
-	
-	}
+}
 	}
 
